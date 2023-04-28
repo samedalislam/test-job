@@ -10,11 +10,12 @@
 .home {
     background-color: whitesmoke;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .title {
@@ -54,7 +55,6 @@ form {
 .input span,
 span {
     font-size: 1.12em;
-    /* color: #fff; */
 }
 form input {
     width: 100%;
@@ -108,4 +108,37 @@ select option {
     border-radius: 4px;
     background: teal;
     color: #fff;
+}
+
+/* views */
+.views {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.view {
+    margin-bottom: 2em;
+    background: #fff;
+    padding: 3.3em 4em;
+    box-shadow: 0 2px 4px -2px #000;
+    border-radius: 1em;
+}
+.view h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+.view h2 span {
+    color: teal;
+}
+
+
+/* sector */
+.sector {
+    margin-top: 1em;
+}
+.sector span span {
+    color: tomato;
+    font-size: 1.3em;
 }
