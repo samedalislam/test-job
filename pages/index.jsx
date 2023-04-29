@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { db } from "../firebase";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import View from "../components/View";
+import { doc, setDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 
 const Home = ({ sectors }) => {
     const [user, setUser] = useState({});
@@ -9,6 +9,9 @@ const Home = ({ sectors }) => {
     const [select, setSelect] = useState({});
     const [agree, setAgree] = useState(false);
     const [userData, setUserData] = useState({});
+    const [disable, setDisable] = useState(true);
+
+    const router = useRouter();
 
     const handleChange = (e) => {
         const selected = e.target;
@@ -34,19 +37,6 @@ const Home = ({ sectors }) => {
         // Add a new document in collection "users"
         await setDoc(doc(db, "users", name), { user });
     };
-
-    useEffect(() => {
-        const findUser = async () => {
-            const userRef = doc(db, "users", name);
-            const userSnap = await getDoc(userRef);
-
-            if (userSnap.exists()) {
-                setUserData(userSnap.data());
-            }
-        };
-
-        name ? findUser() : null;
-    }, [name, user]);
 
     return (
         <div className="home">
@@ -80,17 +70,17 @@ const Home = ({ sectors }) => {
                     />
                     <label htmlFor="checkbox">Agree to terms</label>
                 </div>
-                <button type="submit" id="submit-btn">
+                <button type="submit" className="btn submit-btn">
                     Save
                 </button>
             </form>
-
-            <div className="views">
-                <View
-                    name={userData.user?.name}
-                    sector={userData.user?.sector}
-                    agree={userData.user?.agree}
-                />
+            <div className="btns">
+                <button
+                    onClick={() => (name ? router.push(`${name}`) : "")}
+                    className="btn view-btn"
+                >
+                    View
+                </button>
             </div>
         </div>
     );
